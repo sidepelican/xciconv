@@ -1,9 +1,7 @@
-name: Build
+name: Build xcframework and save as release asset
 
 on:
   workflow_dispatch:
-  release:
-    types: [created]
 
 jobs:
   build:
@@ -24,4 +22,7 @@ jobs:
 
     - name: Deploy
       uses: softprops/action-gh-release@v1
-      file: ./out/libiconv.xcframework.zip
+      with:
+        files: |
+          ./out/libiconv.xcframework.zip
+        prerelease: true

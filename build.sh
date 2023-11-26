@@ -34,6 +34,8 @@ function build_iconv() {
         export CFLAGS="-arch ${ARCH} -pipe -isysroot ${SDKROOT} -mios-version-min=${MIN_IOS_VERSION}"
         local NAME="ios"
     fi
+    export CPPFLAGS=${CFLAGS}
+    export CXXFLAGS=${CFLAGS}
     export LDFLAGS="-arch ${ARCH} -isysroot ${SDKROOT}"
     export CC="$(xcrun -find clang)"
     export CXX="$(xcrun -find clang++)"

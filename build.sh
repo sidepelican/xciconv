@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eux
 cd $(dirname $0)
 
 MIN_IOS_VERSION=15.0
@@ -10,14 +10,13 @@ if [ ! -d "libiconv-*" ]; then
     rm libiconv-${LIBICONV_VERSION}.tar.gz
 fi
 
-pushd libiconv-${LIBICONV_VERSION}
-
 HOST="$(uname -m)-apple-darwin"
 XCODE_ROOT=$(xcode-select -p)
 
 rm -rf out
 mkdir out
 
+pushd libiconv-${LIBICONV_VERSION}
 function build_iconv() {
     local ARCH=$1
     local IS_SIMULATOR=$2
@@ -38,8 +37,9 @@ function build_iconv() {
     export LDFLAGS="-arch ${ARCH} -isysroot ${SDKROOT}"
     export CC="$(xcrun -find clang)"
     export CXX="$(xcrun -find clang++)"
-    export LIBICONV_PLUG=1
+    set +e
     make clean
+    set -e
     ./configure \
         --host=${HOST} \
         --enable-static \
@@ -53,8 +53,8 @@ function build_iconv() {
 build_iconv "arm64" "false"
 build_iconv "x86_64" "true"
 build_iconv "arm64" "true"
-
 popd
+
 pushd out
 
 mkdir -p iconv_universal_iossim/lib

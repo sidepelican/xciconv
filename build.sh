@@ -66,13 +66,13 @@ lipo -create -output iconv_universal_iossim/lib/libiconv.a \
 
 mkdir -p ios/libiconv.framework/Headers
 mkdir -p ios/libiconv.framework/Modules
-cp ../module.modulemap ios/libiconv.framework/Modules
+cp ../template/module.modulemap ios/libiconv.framework/Modules
 cp iconv_arm64_ios/include/iconv.h ios/libiconv.framework/Headers
 cp iconv_arm64_ios/lib/libiconv.a ios/libiconv.framework/libiconv
 
 mkdir -p iossim/libiconv.framework/Headers
 mkdir -p iossim/libiconv.framework/Modules
-cp ../module.modulemap iossim/libiconv.framework/Modules
+cp ../template/module.modulemap iossim/libiconv.framework/Modules
 cp iconv_arm64_iossim/include/iconv.h iossim/libiconv.framework/Headers
 cp iconv_universal_iossim/lib/libiconv.a iossim/libiconv.framework/libiconv
 

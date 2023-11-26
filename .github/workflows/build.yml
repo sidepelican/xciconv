@@ -1,0 +1,27 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run build
+      run: ./build.sh 
+
+    - run: zip -r libiconv.xcframework.zip libiconv.xcframework
+      working-directory: ./out
+
+    - name: Compute checksum
+      run: swift package compute-checksum libiconv.xcframework.zip 
+      working-directory: ./out
+
+    - name: Deploy
+      uses: softprops/action-gh-release@v1
+      file: ./out/libiconv.xcframework.zip

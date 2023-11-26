@@ -1,14 +1,22 @@
 #!/bin/bash
 cd $(dirname $0)
 
-rm -rf out
-mkdir out
-
-pushd libiconv-1.17
-
 MIN_IOS_VERSION=15.0
+LIBICONV_VERSION=1.17
+
+if [ ! -d "libiconv-*" ]; then
+    curl -L https://ftp.gnu.org/pub/gnu/libiconv/libiconv-${LIBICONV_VERSION}.tar.gz -o libiconv-${LIBICONV_VERSION}.tar.gz
+    tar -xzf libiconv-${LIBICONV_VERSION}.tar.gz
+    rm libiconv-${LIBICONV_VERSION}.tar.gz
+fi
+
+pushd libiconv-${LIBICONV_VERSION}
+
 HOST="$(uname -m)-apple-darwin"
 XCODE_ROOT=$(xcode-select -p)
+
+rm -rf out
+mkdir out
 
 function build_iconv() {
     local ARCH=$1

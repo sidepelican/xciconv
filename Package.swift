@@ -3,7 +3,7 @@ import PackageDescription
 
 let libiconvTarget: Target
 #if os(macOS) || os(iOS)
-let useLocal = true
+let useLocal = false
 if useLocal {
     libiconvTarget = .binaryTarget(
         name: "libiconv",

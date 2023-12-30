@@ -1,0 +1,5 @@
+module libiconv [system] {
+    header "iconv.h"
+    link "iconv"
+    export *
+}

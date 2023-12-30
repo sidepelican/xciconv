@@ -22,15 +22,11 @@ function build_iconv() {
     local IS_SIMULATOR=$2
 
     if [ "${IS_SIMULATOR}" = "true" ]; then
-        export SDKVERSION=$(xcrun -sdk iphonesimulator --show-sdk-version)
-        export DEVROOT="${XCODE_ROOT}/Platforms/iPhoneSimulator.platform/Developer"
-        export SDKROOT="${DEVROOT}/SDKs/iPhoneSimulator${SDKVERSION}.sdk"
+        local SDKROOT="${XCODE_ROOT}/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"
         export CFLAGS="-arch ${ARCH} -pipe -isysroot ${SDKROOT} -mios-simulator-version-min=${MIN_IOS_VERSION}"
         local NAME="iossim"
     else
-        export SDKVERSION=$(xcrun -sdk iphoneos --show-sdk-version)
-        export DEVROOT="${XCODE_ROOT}/Platforms/iPhoneOS.platform/Developer"
-        export SDKROOT="${DEVROOT}/SDKs/iPhoneOS${SDKVERSION}.sdk"
+        local SDKROOT="${XCODE_ROOT}/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk"
         export CFLAGS="-arch ${ARCH} -pipe -isysroot ${SDKROOT} -mios-version-min=${MIN_IOS_VERSION}"
         local NAME="ios"
     fi

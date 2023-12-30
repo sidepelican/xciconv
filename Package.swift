@@ -3,15 +3,22 @@ import PackageDescription
 
 let libiconvTarget: Target
 #if os(macOS) || os(iOS)
-libiconvTarget = .binaryTarget(
-    name: "libiconv",
-    url: "https://github.com/sidepelican/xciconv/releases/download/1.17.0/libiconv.xcframework.zip",
-    checksum: "72156afbdbcd8cb7c33f8503ddc1ed603cfd69b3c11790df8113eab102dd74c4"
-)
+let useLocal = true
+if useLocal {
+    libiconvTarget = .binaryTarget(
+        name: "libiconv",
+        path: "./out/libiconv.xcframework"
+    )
+} else {
+    libiconvTarget = .binaryTarget(
+        name: "libiconv",
+        url: "https://github.com/sidepelican/xciconv/releases/download/1.17.0/libiconv.xcframework.zip",
+        checksum: "72156afbdbcd8cb7c33f8503ddc1ed603cfd69b3c11790df8113eab102dd74c4"
+    )
+}
 #else
 libiconvTarget = .systemLibrary(
     name: "libiconv",
-    path: "libiconv",
     pkgConfig: "libiconv"
 )
 #endif
@@ -28,8 +35,7 @@ let package = Package(
         libiconvTarget,
         .executableTarget(
             name: "test",
-            dependencies: ["libiconv"],
-            path: "test"
+            dependencies: ["libiconv"]
         )
     ]
 )

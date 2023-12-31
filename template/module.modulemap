@@ -1,5 +1,5 @@
 framework module "libiconv" {
-	header "iconv.h"
+    header "iconv.h"
 
     export *
 }

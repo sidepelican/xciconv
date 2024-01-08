@@ -10,6 +10,7 @@ if [ ! -d ${ICONV_DIR} ]; then
     curl -L https://ftp.gnu.org/pub/gnu/libiconv/${ICONV_DIR}.tar.gz -o ${ICONV_DIR}.tar.gz
     tar -xzf ${ICONV_DIR}.tar.gz
     rm ${ICONV_DIR}.tar.gz
+    patch -c ${ICONV_DIR}/include/iconv.h.in < template/iconv.h.in.patch
 fi
 
 HOST="$(uname -m)-apple-darwin"

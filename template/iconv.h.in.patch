@@ -1,0 +1,12 @@
+*** ./libiconv-1.17/include/iconv.h copy.in	Mon Jan  8 21:22:17 2024
+--- ./libiconv-1.17/include/iconv.h.in	Mon Jan  8 21:19:28 2024
+***************
+*** 116,121 ****
+--- 116,122 ----
+  
+  /* A type that holds all memory needed by a conversion descriptor.
+     A pointer to such an object can be used as an iconv_t. */
++ #define iconv_allocation_t libiconv_allocation_t
+  typedef struct {
+    void* dummy1[28];
+  #if @USE_MBSTATE_T@

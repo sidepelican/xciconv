@@ -12,8 +12,8 @@ if useLocal {
 } else {
     libiconvTarget = .binaryTarget(
         name: "libiconv",
-        url: "https://github.com/sidepelican/xciconv/releases/download/1.17.2/libiconv.xcframework.zip",
-        checksum: "c76931e0a1fdedc0aa46e3766e332451275cf818061f4b8154728aefccbd4191"
+        url: "https://github.com/sidepelican/xciconv/releases/download/1.17.3/libiconv.xcframework.zip",
+        checksum: "233c46ba520d3f0636096acfb5a9ab06596bdd5c7e09c6bad21e540671ff4b61"
     )
 }
 #else

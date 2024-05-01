@@ -83,6 +83,7 @@ function copy_iconv() {
     mkdir -p ${TARGET}/libiconv.framework/Headers
     mkdir -p ${TARGET}/libiconv.framework/Modules
     cp ../template/module.modulemap ${TARGET}/libiconv.framework/Modules
+    cp ../template/frameworkInfo.plist ${TARGET}/libiconv.framework/Info.plist
     cp iconv_${TARGET}_arm64/include/iconv.h ${TARGET}/libiconv.framework/Headers
     cp iconv_${TARGET}/lib/libiconv.a ${TARGET}/libiconv.framework/libiconv
 }
